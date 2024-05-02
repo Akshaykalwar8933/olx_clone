@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'dart:io';
 
@@ -42,6 +42,53 @@ class _SignupScreenState extends State<SignupScreen> {
       });
     }
   }
+  void _selectImageDialog(){
+
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(3)
+            ),
+            title: Text("Choose an option",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 15,color: Colors.black),),
+            content: Column(
+                mainAxisSize :MainAxisSize.min,
+              children: [
+                InkWell(
+                  onTap: (){
+                    _getFromCamera();
+                  },
+                  child:
+                      Row(
+                        children: [
+                          Icon(Icons.camera),
+                          SizedBox(width: 5,),
+                          Text("Camera",style: TextStyle(fontWeight: FontWeight.w400,fontSize: 14,color: Colors.purple),)
+                        ],
+                      )
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                InkWell(
+                    onTap: (){
+                      _getFromGalery();
+                    },
+                    child:
+                    Row(
+                      children: [
+                        Icon(Icons.image),
+                        SizedBox(width: 5,),
+                        Text("Galery",style: TextStyle(fontWeight: FontWeight.w400,fontSize: 14,color: Colors.purple),)
+                      ],
+                    )
+                ),
+              ],
+            ),
+          );
+        },);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +112,9 @@ class _SignupScreenState extends State<SignupScreen> {
             Form(
                 key: signUpFormKey,
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    _selectImageDialog();
+                  },
                   child: CircleAvatar(
                       radius: screenWidth * 0.20,
                       backgroundColor: Colors.white24,
